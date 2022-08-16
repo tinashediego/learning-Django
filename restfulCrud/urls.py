@@ -17,14 +17,14 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
 from .router import router
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
     path('api/',include(router.urls)),
-    path('gettoken/', TokenObtainPairView.as_view, name='token_obtain_pair'),
-    path('refreshtoken/', TokenRefreshView.as_view, name='token_refresh'),
-    path('verifytoken/', TokenVerifyView.as_view, name='token_verify'),
+    path('account', include('accounts.urls')),
     
 
 ]
