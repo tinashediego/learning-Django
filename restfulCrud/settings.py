@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'bookapi',
-    'accounts', 
-    'newsapi'
+    'registrationapi',
+    'newsapi',
+    'countryapi'
 ]
 
 REST_FRAMEWORK = {

@@ -16,6 +16,8 @@ Including another URLconf
 from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
+
+from registrationapi.views import RegisterApi
 from .router import router
 from rest_framework_simplejwt import views as jwt_views
 
@@ -24,7 +26,7 @@ urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
     path('api/',include(router.urls)),
-    path('account', include('accounts.urls')),
+    path('register/', RegisterApi.as_view())
     
 
 ]
