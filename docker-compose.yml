@@ -1,13 +1,28 @@
-version: '3.9'
+version: "3.8"
+   
 services:
-  django:
-    image: django-docker:0.0.1
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=portfolioDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_URL=localhost
+      - POSTGRES_PORT=5432
+  web:
     build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
     ports:
       - "8000:8000"
     environment:
-      DB_URL: ${DB_URL}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_PORT: ${DB_PORT}
+      - POSTGRES_NAME=portfolioDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_URL=localhost
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db

@@ -5,6 +5,7 @@ from django.db import models
 class Country(models.Model):
     id = models.AutoField(primary_key=True)
     ADMIN = models.CharField(max_length=500)
+    ISO_A3 = models.CharField(max_length=500)
     Ease_of_Moving_Funds = models.CharField(max_length=500)
     Ease_of_Registration = models.CharField(max_length=500)
     Ease_of_fundraising_from_external_sources = models.CharField(max_length=500)
